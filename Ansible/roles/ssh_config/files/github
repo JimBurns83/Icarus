@@ -1,0 +1,9 @@
+Host github.com
+    User git
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/hephaestus
+    IdentityFile ~/.ssh/maple/maple
+    IdentityFile ~/.ssh/jed/jed
+    IdentityFile ~/.ssh/roz/roz
+    IdentityFile ~/.ssh/id_ed25519
+    StrictHostKeyChecking no

@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  become: true
+  vars_prompt:
+    - name: "prompt_change_ssh"
+      prompt: "Replace ssh_config?"
+      default: yes
+      private: no
+  roles:
+    - ssh_config
