@@ -2,7 +2,7 @@
 # tasks file for ssh_config
 - name: Check Config Exists
   stat:
-      path: "~{{ansible_env.sudo_user}}/.ssh/config" # required. The full path of the file/object to get the facts of.
+      path: "~{{ansible_env.SUDO_USER}}/.ssh/config" # required. The full path of the file/object to get the facts of.
       #get_checksum: yes # not required. Whether to return a checksum of the file (default sha1).
       #follow: no # not required. Whether to follow symlinks.
       #checksum_algorithm: md5 # not required. choices: md5;sha1;sha224;sha256;sha384;sha512. Algorithm to determine checksum of file. Will throw an error if the host is unable to use specified algorithm.,The remote host has to support the hashing method specified, C(md5) can be unavailable if the host is FIPS-140 compliant.
@@ -12,7 +12,7 @@
   register: config_file
 - name: Create Config if not exist
   copy:
-      dest: "~{{ansible_env.sudo_user}}/.ssh/config" # required. Remote absolute path where the file should be copied to. If I(src) is a directory, this must be a directory too. If I(dest) is a nonexistent path and if either I(dest) ends with "/" or I(src) is a directory, I(dest) is created. If I(src) and I(dest) are files, the parent directory of I(dest) isn't created: the task fails if it doesn't already exist.
+      dest: "~{{ansible_env.SUDO_USER}}/.ssh/config" # required. Remote absolute path where the file should be copied to. If I(src) is a directory, this must be a directory too. If I(dest) is a nonexistent path and if either I(dest) ends with "/" or I(src) is a directory, I(dest) is created. If I(src) and I(dest) are files, the parent directory of I(dest) isn't created: the task fails if it doesn't already exist.
       #src: undefined # not required. Local path to a file to copy to the remote server; can be absolute or relative. If path is a directory, it is copied recursively. In this case, if path ends with "/", only inside contents of that directory are copied to destination. Otherwise, if it does not end with "/", the directory itself with all contents is copied. This behavior is similar to Rsync.
       #directory_mode: undefined # not required. When doing a recursive copy set the mode for the directories. If this is not set we will use the system defaults. The mode is only set on directories which are newly created, and will not affect those that already existed.
       #force: yes # not required. the default is C(yes), which will replace the remote file when contents are different than the source. If C(no), the file will only be transferred if the destination does not exist.
@@ -36,7 +36,7 @@
   when: config_file.stat.exists == false
 - name: ensure conf.d exists
   file:
-      path: "~{{ansible_env.sudo_user}}/.ssh/conf.d/" # required. Path to the file being managed.
+      path: "~{{ansible_env.SUDO_USER}}/.ssh/conf.d/" # required. Path to the file being managed.
       #src: undefined # not required. path of the file to link to (applies only to C(state=link) and C(state=hard)). Will accept absolute, relative and nonexisting paths. Relative paths are relative to the file being created (C(path)) which is how the UNIX command C(ln -s SRC DEST) treats relative paths.
       #selevel: s0 # not required. Level part of the SELinux file context. This is the MLS/MCS attribute, sometimes known as the C(range). C(_default) feature works as for I(seuser).
       #force: no # not required. force the creation of the symlinks in two cases: the source file does not exist (but will appear later); the destination exists and is a file (so, we need to unlink the "path" file and create symlink to the "src" file in place of it).
@@ -57,7 +57,7 @@
       #setype: undefined # not required. Type part of SELinux file context, C(_default) feature works as for I(seuser).
 - name: "Copy Github SSH Config file"
   copy:
-      dest: "~{{ansible_env.sudo_user}}/.ssh/conf.d/github" # required. Remote absolute path where the file should be copied to. If I(src) is a directory, this must be a directory too. If I(dest) is a nonexistent path and if either I(dest) ends with "/" or I(src) is a directory, I(dest) is created. If I(src) and I(dest) are files, the parent directory of I(dest) isn't created: the task fails if it doesn't already exist.
+      dest: "~{{ansible_env.SUDO_USER}}/.ssh/conf.d/github" # required. Remote absolute path where the file should be copied to. If I(src) is a directory, this must be a directory too. If I(dest) is a nonexistent path and if either I(dest) ends with "/" or I(src) is a directory, I(dest) is created. If I(src) and I(dest) are files, the parent directory of I(dest) isn't created: the task fails if it doesn't already exist.
       src: "files/github" # not required. Local path to a file to copy to the remote server; can be absolute or relative. If path is a directory, it is copied recursively. In this case, if path ends with "/", only inside contents of that directory are copied to destination. Otherwise, if it does not end with "/", the directory itself with all contents is copied. This behavior is similar to Rsync.
       #directory_mode: undefined # not required. When doing a recursive copy set the mode for the directories. If this is not set we will use the system defaults. The mode is only set on directories which are newly created, and will not affect those that already existed.
       #force: yes # not required. the default is C(yes), which will replace the remote file when contents are different than the source. If C(no), the file will only be transferred if the destination does not exist.
