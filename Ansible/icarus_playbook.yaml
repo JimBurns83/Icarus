@@ -21,3 +21,5 @@
     - ssh_config
     - collect_janus
     - collect_hephaestus
+- import_playbook: ../../Hephaestus/Ansible/Launchpad/play_local_launchpad.yaml
+- import_playbook: ../../Hephaestus/Ansible/Launchpad/play_local_gantry.yaml
