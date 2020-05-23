@@ -1,0 +1,27 @@
+---
+# tasks file for collect_hephaestus
+- name: Collect Hephaestus
+  become_user: "{{ansible_env.SUDO_USER}}"
+  become: yes
+  git:
+      dest: "~{{ansible_env.SUDO_USER}}/github.com/JimBurns83" # required. The path of where the repository should be checked out. This parameter is required, unless C(clone) is set to C(no).
+      repo: "git@github.com:JimBurns83/Hephaestus.git" # required. git, SSH, or HTTP(S) protocol address of the git repository.
+      force: no # not required. If C(yes), any modified files in the working repository will be discarded.  Prior to 0.7, this was always 'yes' and could not be disabled.  Prior to 1.9, the default was `yes`
+      #track_submodules: no # not required. if C(yes), submodules will track the latest commit on their master branch (or other branch specified in .gitmodules).  If C(no), submodules will be kept at the revision specified by the main project. This is equivalent to specifying the --remote flag to git submodule update.
+      #reference: undefined # not required. Reference repository (see "git clone --reference ...")
+      #accept_hostkey: no # not required. if C(yes), ensure that "-o StrictHostKeyChecking=no" is present as an ssh option.
+      clone: yes # not required. If C(no), do not clone the repository if it does not exist locally
+      #update: yes # not required. If C(no), do not retrieve new revisions from the origin repository,Operations like archive will work on the existing (old) repository and might not respond to changes to the options version or remote.
+      #ssh_opts: undefined # not required. Creates a wrapper script and exports the path as GIT_SSH which git then automatically uses to override ssh arguments. An example value could be "-o StrictHostKeyChecking=no"
+      #bare: no # not required. if C(yes), repository will be created as a bare repo, otherwise it will be a standard repo with a workspace.
+      #verify_commit: no # not required. if C(yes), when cloning or checking out a C(version) verify the signature of a GPG signed commit. This requires C(git) version>=2.1.0 to be installed. The commit MUST be signed and the public key MUST be present in the GPG keyring.
+      #archive: undefined # not required. Specify archive file path with extension. If specified, creates an archive file of the specified format containing the tree structure for the source tree. Allowed archive formats ["zip", "tar.gz", "tar", "tgz"],This will clone and perform git archive from local directory as not all git servers support git archive.
+      #recursive: yes # not required. if C(no), repository will be cloned without the --recursive option, skipping sub-modules.
+      #executable: undefined # not required. Path to git executable to use. If not supplied, the normal mechanism for resolving binary paths will be used.
+      #remote: origin # not required. Name of the remote.
+      #refspec: undefined # not required. Add an additional refspec to be fetched. If version is set to a I(SHA-1) not reachable from any branch or tag, this option may be necessary to specify the ref containing the I(SHA-1). Uses the same syntax as the 'git fetch' command. An example value could be "refs/meta/config".
+      #separate_git_dir: undefined # not required. The path to place the cloned repository. If specified, Git repository can be separated from working tree.
+      #umask: undefined # not required. The umask to set before doing any checkouts, or any other repository maintenance.
+      #depth: undefined # not required. Create a shallow clone with a history truncated to the specified number or revisions. The minimum possible value is C(1), otherwise ignored. Needs I(git>=1.9.1) to work correctly.
+      #version: HEAD # not required. What version of the repository to check out.  This can be the literal string C(HEAD), a branch name, a tag name. It can also be a I(SHA-1) hash, in which case C(refspec) needs to be specified if the given revision is not already available.
+      #key_file: undefined # not required. Specify an optional private key file path, on the target host, to use for the checkout.

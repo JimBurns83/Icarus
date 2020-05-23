@@ -20,3 +20,4 @@
   roles:
     - ssh_config
     - collect_janus
+    - collect_hephaestus
