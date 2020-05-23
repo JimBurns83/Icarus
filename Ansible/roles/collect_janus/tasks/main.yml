@@ -22,6 +22,7 @@
       #attributes: undefined # not required. Attributes the file or directory should have. To get supported flags look at the man page for I(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by I(lsattr).,C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.
       #setype: undefined # not required. Type part of SELinux file context, C(_default) feature works as for I(seuser).
 - name: Collect Janus
+  become_user: "{ansible_env.SUDO_USER}}"
   git:
       dest: "~{{ansible_env.SUDO_USER}}/.janus/" # required. The path of where the repository should be checked out. This parameter is required, unless C(clone) is set to C(no).
       repo: "git@github.com:JimBurns83/Janus.git" # required. git, SSH, or HTTP(S) protocol address of the git repository.
