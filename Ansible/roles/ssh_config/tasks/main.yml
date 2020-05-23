@@ -88,8 +88,11 @@
       #get_md5: no # not required. Whether to return the md5 sum of the file.,Will return None if not a regular file or if we're unable to use md5 (Common for FIPS-140 compliant systems).,The default of this option changed from C(yes) to C(no) in Ansible 2.5 and will be removed altogether in Ansible 2.9.,Use C(get_checksum=true) with C(checksum_algorithm=md5) to return an md5 hash under the C(checksum) return value.
       #get_attributes: yes # not required. Get file attributes using lsattr tool if present.
   register: deploy_key
+- name: Output Var
+  debug: 
+    msg: "{{deploy_key}}"
 - name: create deploy key
   shell: |
     cp ~{{ansible_env.SUDO_USER}}/.ssh/{{prompt_ssh_key_file}} ~{{ansible_env.SUDO_USER}}/.ssh/deploy
     cp ~{{ansible_env.SUDO_USER}}/.ssh/{{prompt_ssh_key_file}}.pub ~{{ansible_env.SUDO_USER}}/.ssh/deploy.pub
-  when: deploy_key.exists == false
+  when: deploy_key.stat.exists == false
