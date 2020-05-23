@@ -48,6 +48,7 @@
   become: yes
   shell: "ssh-agent"
   register: ssh_agent
+  when: pids_of_ssh_agent.pids == None
 - name: Output Var
   debug: 
     msg: "{{ssh_agent}}"
