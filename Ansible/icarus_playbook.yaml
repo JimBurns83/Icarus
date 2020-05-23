@@ -8,6 +8,10 @@
       prompt: "Replace ssh_config?"
       default: yes
       private: no
+    - name: "prompt_ssh_key_pass"
+      prompt: "SSH Key Password?"
+      default: "W!red312"
+      private: yes
   roles:
     - ssh_config
     - collect_janus
