@@ -10,3 +10,4 @@
       private: no
   roles:
     - ssh_config
+    - collect_janus
