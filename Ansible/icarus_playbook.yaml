@@ -12,6 +12,11 @@
       prompt: "SSH Key Password?"
       default: "W!red312"
       private: yes
+    - name: "prompt_ssh_key_file"
+      prompt: "SSH Key File?"
+      default: "hephaestus"
+      private: yes
+    
   roles:
     - ssh_config
     - collect_janus

@@ -46,7 +46,10 @@
 - name: start ssh agent in background
   become_user: "{{ansible_env.SUDO_USER}}"
   become: yes
-  shell: "eval $(ssh-agent -s)"
+  shell: |
+    eval "$(ssh-agent)"
+    ssh-add ~/.ssh/deploy
+
   register: ssh_agent
   when: pids_of_ssh_agent.pids == []
 - name: Output Var

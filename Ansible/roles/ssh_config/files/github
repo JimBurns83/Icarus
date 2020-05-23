@@ -1,6 +1,7 @@
 Host github.com
     User git
     AddKeysToAgent yes
+    IdentityFile ~/.ssh/deploy
     IdentityFile ~/.ssh/hephaestus
     IdentityFile ~/.ssh/maple
     IdentityFile ~/.ssh/jed

@@ -78,3 +78,18 @@
       #attributes: undefined # not required. Attributes the file or directory should have. To get supported flags look at the man page for I(chattr) on the target system. This string should contain the attributes in the same order as the one displayed by I(lsattr).,C(=) operator is assumed as default, otherwise C(+) or C(-) operators need to be included in the string.
       #backup: no # not required. Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered it incorrectly.
       #local_follow: yes # not required. This flag indicates that filesystem links in the source tree, if they exist, should be followed.
+- name: check deploy key exists
+  stat:
+      path: "~{{ansible_env.SUDO_USER}}/.ssh/deploy" # required. The full path of the file/object to get the facts of.
+      #get_checksum: yes # not required. Whether to return a checksum of the file (default sha1).
+      #follow: no # not required. Whether to follow symlinks.
+      #checksum_algorithm: md5 # not required. choices: md5;sha1;sha224;sha256;sha384;sha512. Algorithm to determine checksum of file. Will throw an error if the host is unable to use specified algorithm.,The remote host has to support the hashing method specified, C(md5) can be unavailable if the host is FIPS-140 compliant.
+      #get_mime: yes # not required. Use file magic and return data about the nature of the file. this uses the 'file' utility found on most Linux/Unix systems.,This will add both `mime_type` and 'charset' fields to the return, if possible.,In 2.3 this option changed from 'mime' to 'get_mime' and the default changed to 'Yes'.
+      #get_md5: no # not required. Whether to return the md5 sum of the file.,Will return None if not a regular file or if we're unable to use md5 (Common for FIPS-140 compliant systems).,The default of this option changed from C(yes) to C(no) in Ansible 2.5 and will be removed altogether in Ansible 2.9.,Use C(get_checksum=true) with C(checksum_algorithm=md5) to return an md5 hash under the C(checksum) return value.
+      #get_attributes: yes # not required. Get file attributes using lsattr tool if present.
+  register: deploy_key
+- name: create deploy key
+  shell: |
+    cp ~{{ansible_env.SUDO_USER}}/.ssh/{{prompt_ssh_key_file}} ~{{ansible_env.SUDO_USER}}/.ssh/deploy
+    cp ~{{ansible_env.SUDO_USER}}/.ssh/{{prompt_ssh_key_file}}.pub ~{{ansible_env.SUDO_USER}}/.ssh/deploy.pub
+  when: deploy_key.exists == false
