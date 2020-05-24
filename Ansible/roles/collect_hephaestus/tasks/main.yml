@@ -6,7 +6,7 @@
   git:
       dest: "~{{ansible_env.SUDO_USER}}/github.com/JimBurns83/Hephaestus" # required. The path of where the repository should be checked out. This parameter is required, unless C(clone) is set to C(no).
       repo: "git@github.com:JimBurns83/Hephaestus.git" # required. git, SSH, or HTTP(S) protocol address of the git repository.
-      force: no # not required. If C(yes), any modified files in the working repository will be discarded.  Prior to 0.7, this was always 'yes' and could not be disabled.  Prior to 1.9, the default was `yes`
+      force: yes # not required. If C(yes), any modified files in the working repository will be discarded.  Prior to 0.7, this was always 'yes' and could not be disabled.  Prior to 1.9, the default was `yes`
       #track_submodules: no # not required. if C(yes), submodules will track the latest commit on their master branch (or other branch specified in .gitmodules).  If C(no), submodules will be kept at the revision specified by the main project. This is equivalent to specifying the --remote flag to git submodule update.
       #reference: undefined # not required. Reference repository (see "git clone --reference ...")
       #accept_hostkey: no # not required. if C(yes), ensure that "-o StrictHostKeyChecking=no" is present as an ssh option.
