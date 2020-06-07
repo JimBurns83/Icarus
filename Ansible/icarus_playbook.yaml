@@ -10,7 +10,7 @@
       private: no
     - name: "prompt_ssh_key_pass"
       prompt: "SSH Key Password?"
-      default: "W!red312"
+      default: ""
       private: yes
     - name: "prompt_ssh_key_file"
       prompt: "SSH Key File?"
